@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, expect, TimeoutError
+from playwright.sync_api import Page
 from test_data import TestUser
 
 
@@ -23,8 +23,6 @@ class LoginPage:
         self.cookie_button.click()
 
 
-
-
 class SearchPage:
 
     def __init__(self, page: Page):
@@ -46,6 +44,8 @@ class SearchPage:
         return book_page
 
 class BookPage:
+
+
     def __init__(self, page: Page):
         self.page = page
         self.add_to_cart = page.get_by_test_id("book__addToCartButton")
