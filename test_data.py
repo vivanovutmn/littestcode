@@ -8,9 +8,9 @@ class TestUser:
     password = 'Qwerty123'
 class TestBook:
     search_text ="Ведьмак"
-    card_name = "Последнее желание. Анджей Сапковский. Текст, доступен аудиоформат"
+    card_name = "Меч Предназначения. Анджей Сапковский. Текст, доступен аудиоформат"
     book_test_id = 70548067
-    cart_title = "Последнее желание"
+    cart_title = "Меч Предназначения"
     cart_author = "Анджей Сапковский"
     cart_format = "Текст"
 
