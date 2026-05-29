@@ -1,5 +1,5 @@
 from playwright.sync_api import Page
-from test_data import TestUser
+from test_data import TestUser, TestBook
 
 
 class LoginPage:
@@ -60,10 +60,14 @@ class BookPage:
 class CartPage:
     def __init__(self, page: Page):
         self.page = page
-        self.delete_book = page.get_by_test_id("cart__listItem--70548067").get_by_test_id("cart__listDeleteButton")
+        #self.delete_book = page.get_by_test_id(f"cart__listItem--{TestBook.book_test_id}").get_by_test_id("cart__listDeleteButton")
         self.confirm_delete = self.page.get_by_test_id("cart__modalDeleteArt--button-primary")
         self.happy_path=page.get_by_test_id("empty-state-content")
-
-    def del_book (self):
-        self.delete_book.click()
+    def delete_book_by_name(self, book_card_name: str):
+        cart_item = self.page.locator('[data-testid^="cart__listItem"]').filter(has_text=book_card_name)
+        delete_book = cart_item.get_by_test_id("cart__listDeleteButton")
+        delete_book.click()
         self.confirm_delete.click()
+    # def del_book (self):
+    #     self.delete_book.click()
+    #     self.confirm_delete.click()

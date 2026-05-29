@@ -220,3 +220,6 @@ __marimo__/
 #test results
 test-results
 allure-results
+
+# .env
+.env
