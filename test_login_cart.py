@@ -1,6 +1,4 @@
-import re
-from playwright.sync_api import Page, expect, TimeoutError
-import pytest
+from playwright.sync_api import expect
 from login_cart_page import LoginPage, SearchPage, BookPage, CartPage
 
 def test_add_del_book (start_page):
