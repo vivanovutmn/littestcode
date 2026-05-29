@@ -1,7 +1,7 @@
 import re
 from playwright.sync_api import Page, expect, TimeoutError
 import pytest
-from logi_cart_page import LoginPage, SearchPage, BookPage, CartPage
+from login_cart_page import LoginPage, SearchPage, BookPage, CartPage
 
 # def test_example(page: Page) -> None:
 #     page.goto("http://litres.ru")
@@ -27,7 +27,7 @@ from logi_cart_page import LoginPage, SearchPage, BookPage, CartPage
 #     page1.get_by_test_id("cart__listItem--70548067").get_by_test_id("cart__listDeleteButton").click()
 #     page1.get_by_test_id("cart__modalDeleteArt--button-primary").click()
 #     expect(page.get_by_text ("Ведьмак в озвучке Всеволода Кузнецова. Анджей Сапковский. Аудио. Хит продаж")).not_to_be_visible()
-def test_add_book (start_page):
+def test_add_del_book (start_page):
     login_page = LoginPage (start_page)
     login_page.do_login()
 
