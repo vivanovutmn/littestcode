@@ -1,5 +1,5 @@
 import allure
-from login_cart_page import SearchPage, BookPage
+from page_object import SearchPage, BookPage
 from test_data import TestBook, TestReview
 
 

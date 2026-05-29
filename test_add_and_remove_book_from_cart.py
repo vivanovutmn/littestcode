@@ -1,6 +1,6 @@
 import allure
 from playwright.sync_api import expect
-from login_cart_page import SearchPage, BookPage, CartPage
+from page_object import SearchPage, BookPage, CartPage
 from test_data import TestBook
 
 @allure.feature("Корзина")

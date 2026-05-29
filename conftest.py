@@ -2,7 +2,7 @@ import allure
 import pytest
 from playwright.sync_api import Page, expect
 
-from login_cart_page import LoginPage
+from page_object import LoginPage
 
 
 @pytest.fixture()
