@@ -6,9 +6,9 @@ from test_data import TestBook
 @allure.feature("Корзина")
 @allure.story("Добавление и удаление книги")
 @allure.title("Пользователь может добавить книгу в корзину и удалить её")
-def test_add_del_book (authorized_page):
+def test_add_del_book (clear_cart):
     with allure.step("Поиск книги"):
-        search_page = SearchPage (authorized_page)
+        search_page = SearchPage (clear_cart)
         search_page.search_book(TestBook.search_text)
     with allure.step("Открытие найденной книги"):
         book_page = search_page.open_book (TestBook.card_name)
@@ -17,9 +17,12 @@ def test_add_del_book (authorized_page):
         book_page_object.add_book()
     with allure.step("Удаление книги из корзины"):
         cart_page = CartPage (book_page)
-        cart_page.delete_book_by_name(TestBook.card_name)
+        cart_page.delete_book_by_name(TestBook.cart_title)
     with allure.step("Проверить, что корзина пустая"):
-        expect(cart_page.happy_path).to_be_visible()
+        expect(cart_page.happy_path).to_be_visible(timeout=15000)
+    with allure.step ("Проверить, что книгу снова можно добавить в корзину после удаления из нее"):
+        book_page.go_back()
+        expect(book_page.get_by_test_id("book__addToCartButton")).to_be_visible()
 
 
 

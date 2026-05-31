@@ -96,12 +96,9 @@ class CartPage:
         #self.delete_book = page.get_by_test_id(f"cart__listItem--{TestBook.book_test_id}").get_by_test_id("cart__listDeleteButton")
         self.confirm_delete = self.page.get_by_test_id("cart__modalDeleteArt--button-primary")
         self.happy_path=page.get_by_test_id("empty-state-content")
-    def delete_book_by_name(self, book_card_name: str):
-        cart_item = self.page.locator('[data-testid^="cart__listItem"]').filter(has_text=TestBook.cart_title)
-        expect(cart_item).to_be_visible()
+    def delete_book_by_name(self, cart_title):
+        cart_item = self.page.locator('[data-testid^="cart__listItem"]').filter(has_text=cart_title)
+        expect(cart_item).to_be_visible(timeout=15000)
         delete_book = cart_item.get_by_test_id("cart__listDeleteButton")
         delete_book.click()
         self.confirm_delete.click()
-    # def del_book (self):
-    #     self.delete_book.click()
-    #     self.confirm_delete.click()
