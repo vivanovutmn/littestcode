@@ -16,10 +16,11 @@ def authorized_page (start_page: Page):
     with allure.step("Авторизация"):
         login_page = LoginPage (start_page)
         login_page.do_login()
-        return start_page
+
+    return start_page
 
 @pytest.fixture()
-def clear_cart (authorized_page: Page):
+def authorized_empty_cart_page (authorized_page: Page):
     clear_the_cart(authorized_page)
     yield authorized_page
     clear_the_cart(authorized_page)

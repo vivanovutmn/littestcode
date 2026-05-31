@@ -93,7 +93,6 @@ class BookPage:
 class CartPage:
     def __init__(self, page: Page):
         self.page = page
-        #self.delete_book = page.get_by_test_id(f"cart__listItem--{TestBook.book_test_id}").get_by_test_id("cart__listDeleteButton")
         self.confirm_delete = self.page.get_by_test_id("cart__modalDeleteArt--button-primary")
         self.happy_path=page.get_by_test_id("empty-state-content")
     def delete_book_by_name(self, cart_title):
@@ -102,3 +101,4 @@ class CartPage:
         delete_book = cart_item.get_by_test_id("cart__listDeleteButton")
         delete_book.click()
         self.confirm_delete.click()
+        expect(cart_item).to_be_hidden(timeout=10000)

@@ -6,9 +6,9 @@ from test_data import TestBook
 @allure.feature("Корзина")
 @allure.story("Добавление и удаление книги")
 @allure.title("Пользователь может добавить книгу в корзину и удалить её")
-def test_add_del_book (clear_cart):
+def test_add_del_book (authorized_empty_cart_page):
     with allure.step("Поиск книги"):
-        search_page = SearchPage (clear_cart)
+        search_page = SearchPage (authorized_empty_cart_page)
         search_page.search_book(TestBook.search_text)
     with allure.step("Открытие найденной книги"):
         book_page = search_page.open_book (TestBook.card_name)
