@@ -1,44 +1,19 @@
-import allure
 import pytest
-from playwright.sync_api import Page, expect
+from pathlib import Path
 
-from page_object import LoginPage
-
-
-@pytest.fixture()
-def start_page (page: Page):
-    page.goto("http://litres.ru", wait_until="domcontentloaded")
-
-    return page
-
-@pytest.fixture()
-def authorized_page (start_page: Page):
-    with allure.step("Авторизация"):
-        login_page = LoginPage (start_page)
-        login_page.do_login()
-
-    return start_page
-
-@pytest.fixture()
-def authorized_empty_cart_page (authorized_page: Page):
-    clear_the_cart(authorized_page)
-    yield authorized_page
-    clear_the_cart(authorized_page)
+from fixtures.auth_fixture import *
+from fixtures.cart_fixture import *
+from fixtures.book_fixture import *
 
 
-def clear_the_cart (page: Page):
-    page.goto("http://litres.ru/my-books/cart/", wait_until="domcontentloaded")
-    cart_items = page.locator('[data-testid^="cart__listItem--"]')
-    delete_buttons = page.get_by_test_id("cart__listDeleteButton")
-    confirm_delete = page.get_by_test_id("cart__modalDeleteArt--button-primary")
-
-    while cart_items.count() > 0:
-        count_before = cart_items.count()
-
-        delete_buttons.first.click()
-        confirm_delete.click()
-
-        expect(cart_items).to_have_count(count_before - 1)
+ROOT_DIR = Path(__file__).parent
+AUTH_STATE_PATH = ROOT_DIR / "auth" / "litres_state.json"
 
 
-
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    return {
+        **browser_context_args,
+        "storage_state": str(AUTH_STATE_PATH),
+        "base_url": "https://www.litres.ru",
+    }

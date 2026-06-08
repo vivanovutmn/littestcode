@@ -1,6 +1,7 @@
 import allure
-from page_object import SearchPage, BookPage
-from test_data import TestBook, TestReview
+from pages.search_page import SearchPage
+from pages.book_page import BookPage
+from data_test_files.test_data import TestBook, TestReview
 
 
 @allure.feature("Отзывы")
