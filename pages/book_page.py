@@ -144,7 +144,11 @@ class BookPage:
         self.finish_button.click()
         expect(self.unfinish_button).to_be_visible(timeout=15000)
 
+        self.page.reload(wait_until="domcontentloaded")
+
     def unfinish_book(self):
         expect(self.unfinish_button).to_be_visible(timeout=15000)
         self.unfinish_button.click()
         expect(self.finish_button).to_be_visible(timeout=15000)
+
+        self.page.reload(wait_until="domcontentloaded")
